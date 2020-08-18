@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shardingsphere.demo.mapper.OrderMapper">
+    <!-- 使用resultMap映射实体类和字段之间的一一对应关系 -->
+    <resultMap id="OrderResultMap" type="com.shardingsphere.demo.entity.Order">
+        <id property="id" column="id" />
+        <result property="userId" column="user_id" />
+        <result property="orderId" column="order_id" />
+    </resultMap>
+
+    <insert id="insertOrder" parameterType="com.shardingsphere.demo.entity.Order">
+        insert into t_order(user_id, order_id) values(#{userId}, #{orderId})
+    </insert>
+
+    <select id="findAll" resultMap="OrderResultMap">
+        select id, user_id, order_id from t_order
+    </select>
+</mapper>
